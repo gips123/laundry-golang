@@ -157,6 +157,75 @@ Untuk manual migration, jalankan file SQL di folder `migrations/`:
 psql -U postgres -d laundryhub -f migrations/001_init.sql
 ```
 
+## 🔨 Building & Testing Build
+
+### Test Build (Tanpa membuat binary)
+
+Untuk memastikan kode dapat dikompilasi tanpa error:
+
+```bash
+# Test build semua package
+go build ./...
+
+# Test build server saja
+go build ./cmd/server
+
+# Test build seed saja
+go build ./cmd/seed
+
+# Atau menggunakan Makefile
+make test-build
+```
+
+### Build Binary
+
+Untuk membuat executable binary:
+
+```bash
+# Build server
+go build -o bin/server ./cmd/server
+
+# Build seed
+go build -o bin/seed ./cmd/seed
+
+# Atau menggunakan Makefile
+make build          # Build semua
+make build-server   # Build server saja
+make build-seed     # Build seed saja
+```
+
+Binary akan tersimpan di folder `bin/`.
+
+### Menjalankan Binary
+
+Setelah build, Anda bisa menjalankan binary:
+
+```bash
+# Jalankan server
+./bin/server
+
+# Jalankan seed
+./bin/seed
+```
+
+### Makefile Commands
+
+Proyek ini menyediakan Makefile untuk memudahkan development:
+
+```bash
+make help           # Lihat semua commands
+make test-build     # Test build (compile check)
+make build          # Build semua binary
+make build-server   # Build server binary
+make build-seed     # Build seed binary
+make clean          # Hapus build artifacts
+make run            # Run server (go run)
+make run-seed       # Run seed (go run)
+make tidy           # go mod tidy
+make vet            # go vet (static analysis)
+make fmt            # Format code
+```
+
 ## 🧪 Testing
 
 Untuk testing API, Anda bisa menggunakan:
