@@ -229,6 +229,33 @@ curl -X POST http://localhost:8080/api/v1/auth/login \
   }'
 ```
 
+## 🐳 Docker Deployment
+
+Aplikasi ini sudah dilengkapi dengan Dockerfile untuk deployment yang optimal.
+
+### Build Docker Image
+
+```bash
+docker build -t laundry-go .
+```
+
+### Run Docker Container
+
+```bash
+docker run -p 8080:8080 --env-file .env laundry-go
+```
+
+### Docker Features
+
+- **Multi-stage build** - Image kecil (~20MB)
+- **Non-root user** - Lebih aman
+- **Health check** - Otomatis check kesehatan aplikasi
+- **Optimized** - CGO disabled untuk binary yang lebih kecil
+
+### Railway dengan Dockerfile
+
+Railway akan otomatis menggunakan Dockerfile jika ada. Konfigurasi sudah di-set di `railway.json`.
+
 ## 📁 Project Structure
 
 ```
@@ -246,6 +273,9 @@ laundry-go/
 │   ├── service/             # Business logic
 │   └── utils/               # Utility functions
 ├── migrations/              # SQL migration files
+├── Dockerfile               # Docker configuration
+├── .dockerignore            # Docker ignore file
+├── railway.json            # Railway configuration
 ├── .env.example            # Example environment file
 ├── go.mod                  # Go modules
 └── README.md               # This file
