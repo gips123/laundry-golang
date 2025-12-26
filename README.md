@@ -95,21 +95,6 @@ ALLOWED_ORIGINS=http://localhost:3000
 
 **Note:** Aplikasi sekarang mendukung `DATABASE_URL` untuk Supabase, Heroku, atau cloud database lainnya. Jika `DATABASE_URL` diset, aplikasi akan menggunakannya secara otomatis.
 
-6. (Optional) Seed dummy data untuk testing:
-```bash
-go run cmd/seed/main.go
-```
-
-Ini akan mengimport data dummy ke database:
-- 3 users (user@laundryhub.com, admin@laundryhub.com, test@test.com)
-- 6 laundries dengan services
-- 3 sample orders
-
-**Credentials untuk testing:**
-- Email: `user@laundryhub.com`, Password: `password123`
-- Email: `admin@laundryhub.com`, Password: `admin123`
-- Email: `test@test.com`, Password: `test123`
-
 ## 🏃 Running the Server
 
 ```bash
@@ -170,9 +155,6 @@ go build ./...
 # Test build server saja
 go build ./cmd/server
 
-# Test build seed saja
-go build ./cmd/seed
-
 # Atau menggunakan Makefile
 make test-build
 ```
@@ -185,13 +167,9 @@ Untuk membuat executable binary:
 # Build server
 go build -o bin/server ./cmd/server
 
-# Build seed
-go build -o bin/seed ./cmd/seed
-
 # Atau menggunakan Makefile
-make build          # Build semua
-make build-server   # Build server saja
-make build-seed     # Build seed saja
+make build          # Build server
+make build-server   # Build server
 ```
 
 Binary akan tersimpan di folder `bin/`.
@@ -203,9 +181,6 @@ Setelah build, Anda bisa menjalankan binary:
 ```bash
 # Jalankan server
 ./bin/server
-
-# Jalankan seed
-./bin/seed
 ```
 
 ### Makefile Commands
@@ -215,12 +190,10 @@ Proyek ini menyediakan Makefile untuk memudahkan development:
 ```bash
 make help           # Lihat semua commands
 make test-build     # Test build (compile check)
-make build          # Build semua binary
+make build          # Build server binary
 make build-server   # Build server binary
-make build-seed     # Build seed binary
 make clean          # Hapus build artifacts
 make run            # Run server (go run)
-make run-seed       # Run seed (go run)
 make tidy           # go mod tidy
 make vet            # go vet (static analysis)
 make fmt            # Format code
